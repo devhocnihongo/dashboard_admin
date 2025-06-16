@@ -1,5 +1,8 @@
 Run code: flutter run -d chrome
 
+Tài khoản: admin
+Mật khẩu: admin123
+
 # dashboard_admin
 
 A new Flutter project.
