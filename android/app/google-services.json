@@ -1,0 +1,135 @@
+{
+  "project_info": {
+    "project_number": "739235439031",
+    "project_id": "agrimarket-60402",
+    "storage_bucket": "agrimarket-60402.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:739235439031:android:5e43f410015c8767c5c832",
+        "android_client_info": {
+          "package_name": "com.example.admin_dashboard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "739235439031-rtu60cpj8ps6c9of58c2fs3rtctmnl5p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIKk5iB7TtCPhYdvIohhO9dxr-MTrteA8"
+        },
+        {
+          "current_key": "AIzaSyAF9LKr9OJxKgbEyV_KupR68NzyDOxD10k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "739235439031-rtu60cpj8ps6c9of58c2fs3rtctmnl5p.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "739235439031-7sootfh4cife177k3hb9af4tkeskubrb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.agrimarket"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:739235439031:android:3e8316dfd6c2c3d7c5c832",
+        "android_client_info": {
+          "package_name": "com.example.agrimarket"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "739235439031-rc4bk9ohpgk4r4c7u6eeosamg5p3banl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.agrimarket",
+            "certificate_hash": "436ebffe8629a27c0e2fc4f5dbc2a56cbff29b4c"
+          }
+        },
+        {
+          "client_id": "739235439031-rtu60cpj8ps6c9of58c2fs3rtctmnl5p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIKk5iB7TtCPhYdvIohhO9dxr-MTrteA8"
+        },
+        {
+          "current_key": "AIzaSyAF9LKr9OJxKgbEyV_KupR68NzyDOxD10k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "739235439031-rtu60cpj8ps6c9of58c2fs3rtctmnl5p.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "739235439031-7sootfh4cife177k3hb9af4tkeskubrb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.agrimarket"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:739235439031:android:e210014a64123ae6c5c832",
+        "android_client_info": {
+          "package_name": "com.example.dashboard_admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "739235439031-rtu60cpj8ps6c9of58c2fs3rtctmnl5p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIKk5iB7TtCPhYdvIohhO9dxr-MTrteA8"
+        },
+        {
+          "current_key": "AIzaSyAF9LKr9OJxKgbEyV_KupR68NzyDOxD10k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "739235439031-rtu60cpj8ps6c9of58c2fs3rtctmnl5p.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "739235439031-7sootfh4cife177k3hb9af4tkeskubrb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.agrimarket"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
