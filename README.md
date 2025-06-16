@@ -1,3 +1,5 @@
+Run code: flutter run -d chrome
+
 # dashboard_admin
 
 A new Flutter project.
