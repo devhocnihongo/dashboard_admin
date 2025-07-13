@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dashboard_overview_page.dart';
 import 'user_management_page.dart';
 import 'content_moderation_page.dart';
+import 'discount_code_management_page.dart';
 
 class AdminDashboardPage extends StatefulWidget {
   final VoidCallback? onLogout;
@@ -18,12 +19,14 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
     const DashboardOverviewPage(),
     const UserManagementPage(),
     const ContentModerationPage(),
+    const DiscountCodeManagementPage(),
   ];
 
   final _pageTitles = [
     "Tổng quan Dashboard",
     "Quản lý Người dùng",
     "Kiểm duyệt Nội dung",
+    "Quản lý Mã Giảm Giá",
   ];
 
   void _onSelectMenu(int index) {
@@ -70,7 +73,6 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
       backgroundColor: const Color(0xFFF8FAFF),
       body: Row(
         children: [
-          // Sidebar
           Container(
             width: 240,
             color: Colors.white,
@@ -78,7 +80,6 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // Logo + Title
                 Row(
                   children: const [
                     SizedBox(width: 16),
@@ -98,6 +99,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
                 buildMenuItem(index: 0, icon: Icons.dashboard_rounded, label: "Dashboard"),
                 buildMenuItem(index: 1, icon: Icons.people_alt_outlined, label: "Quản lý Người dùng"),
                 buildMenuItem(index: 2, icon: Icons.edit_note, label: "Kiểm duyệt Nội dung"),
+                buildMenuItem(index: 3, icon: Icons.card_giftcard, label: "Mã Giảm Giá"),
                 const Spacer(),
               ],
             ),
@@ -123,7 +125,6 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
                           color: Colors.black,
                         ),
                       ),
-                      // Admin info + setting + logout
                       Row(
                         children: [
                           const Text(
@@ -162,7 +163,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
                 // Footer
                 const SizedBox(height: 10),
                 const Text(
-                  "Admin Dashboard © 2025 - Phung Duc Khai",
+                  "Admin Dashboard © 2025 - Agrimarket",
                   style: TextStyle(fontSize: 14, color: Color(0xFF94A3B8)),
                 ),
                 const SizedBox(height: 5),
