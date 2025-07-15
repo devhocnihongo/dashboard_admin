@@ -6,6 +6,20 @@ import 'product_list_page.dart';
 class ContentModerationPage extends StatelessWidget {
   const ContentModerationPage({Key? key}) : super(key: key);
 
+  void _toggleStoreVerify(BuildContext context, String storeId, String currentState) async {
+    try {
+      final newState = currentState == "verify" ? "pending" : "verify";
+      await FirebaseFirestore.instance
+          .collection('stores')
+          .doc(storeId)
+          .update({'state': newState});
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Lỗi: $e'), backgroundColor: Colors.red),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -44,64 +58,43 @@ class ContentModerationPage extends StatelessWidget {
                   itemCount: users.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
-                    childAspectRatio: 2,
-                    crossAxisSpacing: 32,
-                    mainAxisSpacing: 24,
+                    childAspectRatio: 1.75,
+                    crossAxisSpacing: 64,
+                    mainAxisSpacing: 48,
                   ),
                   itemBuilder: (context, index) {
                     final userDoc = users[index];
                     final userData = userDoc.data() as Map<String, dynamic>;
                     final ownerName = userData['name'] ?? '';
                     final ownerUid = userData['uid'] ?? userDoc.id;
-                    final userStatus = userData['status'];
 
-                    return FutureBuilder<QuerySnapshot>(
-                      future: FirebaseFirestore.instance
+                    return StreamBuilder<QuerySnapshot>(
+                      stream: FirebaseFirestore.instance
                           .collection('stores')
                           .where('ownerUid', isEqualTo: ownerUid)
                           .limit(1)
-                          .get(),
+                          .snapshots(),
                       builder: (context, storeSnapshot) {
                         String storeName = "(Chưa có tên shop)";
                         String address = "(Chưa có địa chỉ)";
                         String description = "(Chưa có mô tả)";
-                        String status = "pending";
                         String? imageUrl;
                         String? storeId;
+                        String state = "pending";
                         if (storeSnapshot.hasData &&
                             storeSnapshot.data!.docs.isNotEmpty) {
                           final store = storeSnapshot.data!.docs.first.data()
                           as Map<String, dynamic>;
+                          final storeLocation = store['storeLocation'] as Map<String, dynamic>?;
                           storeName = store['name'] ?? "(Chưa có tên shop)";
-                          address = store['address'] ?? "(Chưa có địa chỉ)";
+                          address = storeLocation?['address'] ?? "(Chưa có địa chỉ)";
                           description = store['description'] ?? "(Chưa có mô tả)";
-                          status = store['state'] ?? "pending";
                           imageUrl = store['image'];
                           storeId = storeSnapshot.data!.docs.first.id;
+                          state = store['state'] ?? "pending";
                         }
 
-                        String displayStatus;
-                        Color displayColor;
-                        if (userStatus == false ||
-                            userStatus == "inactive" ||
-                            userStatus == 0) {
-                          displayStatus = "không hoạt động";
-                          displayColor = Colors.red;
-                        } else {
-                          if (status == "active") {
-                            displayStatus = "active";
-                            displayColor = Colors.green;
-                          } else if (status == "pending") {
-                            displayStatus = "pending";
-                            displayColor = Colors.orange;
-                          } else if (status == "locked" || status == "banned") {
-                            displayStatus = "khóa";
-                            displayColor = Colors.red;
-                          } else {
-                            displayStatus = status;
-                            displayColor = Colors.blueGrey;
-                          }
-                        }
+                        final isVerified = state == "verify";
 
                         return InkWell(
                           borderRadius: BorderRadius.circular(16),
@@ -147,13 +140,11 @@ class ContentModerationPage extends StatelessWidget {
                                       : null,
                                 ),
                                 const SizedBox(width: 18),
-                                // Info
                                 Expanded(
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      // Chủ shop
                                       Row(
                                         children: [
                                           const Icon(Icons.person, color: Color(0xFF4338CA), size: 16),
@@ -163,7 +154,7 @@ class ContentModerationPage extends StatelessWidget {
                                               ownerName,
                                               style: const TextStyle(
                                                 fontWeight: FontWeight.bold,
-                                                fontSize: 16,
+                                                fontSize: 14,
                                                 color: Color(0xFF22223B),
                                               ),
                                               overflow: TextOverflow.ellipsis,
@@ -172,8 +163,7 @@ class ContentModerationPage extends StatelessWidget {
                                           ),
                                         ],
                                       ),
-                                      const SizedBox(height: 4),
-                                      // Tên shop
+                                      const SizedBox(height: 9),
                                       Row(
                                         children: [
                                           const Icon(Icons.store, color: Color(0xFFB794F4), size: 16),
@@ -183,7 +173,7 @@ class ContentModerationPage extends StatelessWidget {
                                               storeName,
                                               style: const TextStyle(
                                                 fontWeight: FontWeight.w500,
-                                                fontSize: 16,
+                                                fontSize: 14,
                                                 color: Color(0xFF4338CA),
                                               ),
                                               overflow: TextOverflow.ellipsis,
@@ -192,7 +182,7 @@ class ContentModerationPage extends StatelessWidget {
                                           ),
                                         ],
                                       ),
-                                      const SizedBox(height: 4),
+                                      const SizedBox(height: 9),
                                       Row(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
@@ -208,7 +198,7 @@ class ContentModerationPage extends StatelessWidget {
                                           ),
                                         ],
                                       ),
-                                      const SizedBox(height: 4),
+                                      const SizedBox(height: 9),
                                       Row(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
@@ -217,64 +207,70 @@ class ContentModerationPage extends StatelessWidget {
                                           Flexible(
                                             child: Text(
                                               description,
-                                              style: const TextStyle(fontSize: 13, color: Color(0xFF575757)),
+                                              style: const TextStyle(fontSize: 14, color: Color(0xFF575757)),
                                               maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
                                             ),
                                           ),
                                         ],
                                       ),
-                                      const SizedBox(height: 4),
-                                      Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                      const SizedBox(height: 2),
+                                      Row(
                                         children: [
-                                          Row(
-                                            children: [
-                                              const Icon(Icons.verified, color: Colors.green, size: 16),
-                                              const SizedBox(width: 6),
-                                              Text(
-                                                displayStatus,
-                                                style: TextStyle(
-                                                  fontSize: 13,
-                                                  color: displayColor,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          const SizedBox(height: 4),
-                                          GestureDetector(
-                                            onTap: () {
-                                              showDialog(
-                                                context: context,
-                                                builder: (_) => StoreDetailDialog(
-                                                  ownerName: ownerName,
-                                                  ownerUid: ownerUid,
-                                                  storeName: storeName,
-                                                  address: address,
-                                                  description: description,
-                                                  status: displayStatus,
-                                                  statusColor: displayColor,
-                                                  imageUrl: imageUrl,
-                                                ),
-                                              );
-                                            },
-                                            child: Row(
-                                              children: [
-                                                Icon(Icons.remove_red_eye, color: Colors.blue.shade700, size: 19),
-                                                const SizedBox(width: 4),
-                                                Text(
-                                                  "Xem chi tiết",
-                                                  style: TextStyle(
-                                                    color: Colors.blue.shade700,
-                                                    fontWeight: FontWeight.w500,
-                                                    decoration: TextDecoration.underline,
-                                                  ),
-                                                ),
-                                              ],
+                                          const Icon(Icons.verified, color: Colors.green, size: 16),
+                                          const SizedBox(width: 6),
+                                          Text(
+                                            isVerified ? "Đã duyệt" : "Chưa duyệt",
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              color: isVerified ? Colors.green : Colors.red,
+                                              fontWeight: FontWeight.w500,
                                             ),
                                           ),
+                                          // SỬA ĐỔI TẠI ĐÂY:
+                                          const Spacer(), // Thay thế SizedBox bằng Spacer
+                                          if (storeId != null)
+                                            Transform.scale(
+                                              scale: 0.55,
+                                              child: Switch(
+                                                value: isVerified,
+                                                onChanged: (val) {
+                                                  _toggleStoreVerify(context, storeId!, state);
+                                                },
+                                              ),
+                                            ),
                                         ],
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          showDialog(
+                                            context: context,
+                                            builder: (_) => StoreDetailDialog(
+                                              ownerName: ownerName,
+                                              ownerUid: ownerUid,
+                                              storeName: storeName,
+                                              address: address,
+                                              description: description,
+                                              status: isVerified ? "Đã duyệt" : "Chưa duyệt",
+                                              statusColor: isVerified ? Colors.green : Colors.red,
+                                              imageUrl: imageUrl,
+                                            ),
+                                          );
+                                        },
+                                        child: Row(
+                                          children: [
+                                            Icon(Icons.remove_red_eye, color: Colors.blue.shade700, size: 19),
+                                            const SizedBox(width: 4),
+                                            Text(
+                                              "Xem chi tiết",
+                                              style: TextStyle(
+                                                color: Colors.blue.shade700,
+                                                fontWeight: FontWeight.w500,
+                                                decoration: TextDecoration.underline,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ],
                                   ),

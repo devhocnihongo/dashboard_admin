@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../pages/commission_management_page.dart';
 
 class SideMenu extends StatelessWidget {
   final void Function(int) onMenuSelect;
@@ -33,6 +34,15 @@ class SideMenu extends StatelessWidget {
             title: const Text('Kiểm duyệt nội dung'),
             onTap: () => onMenuSelect(1),
           ),
+          ListTile(
+            leading: Icon(Icons.attach_money),
+            title: Text("Quản lý hoa hồng"),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(
+                builder: (_) => const CommissionManagementPage(),
+              ));
+            },
+          )
         ],
       ),
     );

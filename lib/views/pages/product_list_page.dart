@@ -102,7 +102,7 @@ class _ProductListPageState extends State<ProductListPage> {
                                     final String shortDesc = description.length > 30
                                         ? '${description.substring(0, 30)}...'
                                         : description;
-                                    // SỬA Ở ĐÂY: CỘT TÊN SẢN PHẨM
+                                    // CỘT TÊN SẢN PHẨM
                                     return Row(
                                       children: [
                                         _cellCM('${start + idx + 1}', width: 40, align: TextAlign.center),

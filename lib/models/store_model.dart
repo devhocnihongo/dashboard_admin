@@ -3,12 +3,14 @@ class StoreModel {
   final String name;
   final String ownerId;
   final bool isVerified;
+  final String state;
 
   StoreModel({
     required this.id,
     required this.name,
     required this.ownerId,
     required this.isVerified,
+    required this.state,
   });
 
   factory StoreModel.fromJson(String id, Map<String, dynamic> data) {
@@ -21,6 +23,7 @@ class StoreModel {
           : (data['isVerified'] is String
           ? data['isVerified'].toLowerCase() == 'true'
           : false),
+      state: data['state'] ?? 'pending',
     );
   }
 }

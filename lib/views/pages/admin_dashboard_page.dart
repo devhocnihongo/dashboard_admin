@@ -1,3 +1,4 @@
+import 'package:dashboard_admin/views/pages/commission_management_page.dart';
 import 'package:flutter/material.dart';
 import 'dashboard_overview_page.dart';
 import 'user_management_page.dart';
@@ -20,6 +21,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
     const UserManagementPage(),
     const ContentModerationPage(),
     const DiscountCodeManagementPage(),
+    const CommissionManagementPage(),
   ];
 
   final _pageTitles = [
@@ -27,6 +29,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
     "Quản lý Người dùng",
     "Kiểm duyệt Nội dung",
     "Quản lý Mã Giảm Giá",
+    "Tiền Hoa Hồng"
   ];
 
   void _onSelectMenu(int index) {
@@ -100,6 +103,7 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
                 buildMenuItem(index: 1, icon: Icons.people_alt_outlined, label: "Quản lý Người dùng"),
                 buildMenuItem(index: 2, icon: Icons.edit_note, label: "Kiểm duyệt Nội dung"),
                 buildMenuItem(index: 3, icon: Icons.card_giftcard, label: "Mã Giảm Giá"),
+                buildMenuItem(index: 4, icon: Icons.attach_money, label: "Tiền Hoa Hồng"),
                 const Spacer(),
               ],
             ),
