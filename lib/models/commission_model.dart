@@ -5,7 +5,7 @@ class Commission {
   final String storeId;
   final String storeName;
   final int commissionAmount;
-  final String status; // 'waiting', 'paid'
+  final String status;
   final DateTime dueDate;
   final DateTime createdAt;
   final DateTime? paidDate;

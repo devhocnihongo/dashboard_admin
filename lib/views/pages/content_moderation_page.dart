@@ -227,8 +227,7 @@ class ContentModerationPage extends StatelessWidget {
                                               fontWeight: FontWeight.w500,
                                             ),
                                           ),
-                                          // SỬA ĐỔI TẠI ĐÂY:
-                                          const Spacer(), // Thay thế SizedBox bằng Spacer
+                                          const Spacer(),
                                           if (storeId != null)
                                             Transform.scale(
                                               scale: 0.55,

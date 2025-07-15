@@ -26,8 +26,8 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
 
   final _pageTitles = [
     "Tổng quan Dashboard",
-    "Quản lý Người dùng",
-    "Kiểm duyệt Nội dung",
+    "Quản lý Người Dùng",
+    "Quản lý Nhà Cung Cấp",
     "Quản lý Mã Giảm Giá",
     "Tiền Hoa Hồng"
   ];
@@ -100,8 +100,8 @@ class _AdminDashboardPageState extends State<AdminDashboardPage> {
                 ),
                 const SizedBox(height: 32),
                 buildMenuItem(index: 0, icon: Icons.dashboard_rounded, label: "Dashboard"),
-                buildMenuItem(index: 1, icon: Icons.people_alt_outlined, label: "Quản lý Người dùng"),
-                buildMenuItem(index: 2, icon: Icons.edit_note, label: "Kiểm duyệt Nội dung"),
+                buildMenuItem(index: 1, icon: Icons.people_alt_outlined, label: "Quản lý Người Dùng"),
+                buildMenuItem(index: 2, icon: Icons.edit_note, label: "Quản lý Nhà Cung Cấp"),
                 buildMenuItem(index: 3, icon: Icons.card_giftcard, label: "Mã Giảm Giá"),
                 buildMenuItem(index: 4, icon: Icons.attach_money, label: "Tiền Hoa Hồng"),
                 const Spacer(),

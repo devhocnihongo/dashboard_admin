@@ -20,8 +20,8 @@ class _CommissionManagementPageState extends State<CommissionManagementPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Quản lý Hoa hồng'),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: const Text('Quản lý Tiền Hoa hồng'),
+        foregroundColor: const Color(0xFF4338CA),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,7 +54,6 @@ class _CommissionManagementPageState extends State<CommissionManagementPage> {
                     ),
                   );
                 }
-                // Hiển thị theo từng store
                 return ListView(
                   padding: const EdgeInsets.all(8),
                   children: data.entries.map((entry) {
