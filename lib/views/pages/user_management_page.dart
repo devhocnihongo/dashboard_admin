@@ -12,7 +12,7 @@ class UserManagementPage extends StatefulWidget {
 class _UserManagementPageState extends State<UserManagementPage> {
   String search = "";
 
-  final int _rowsPerPage = 10;
+  final int _rowsPerPage = 5;
   int _currentPage = 0;
 
   void _toggleUserStatus(String docId, bool newStatus) {
